@@ -31,7 +31,7 @@ std::vector<int> BinaryParser::parse(string &s) {
         }
     }
     if (num.size() != 2){
-        throw "Incorrect line";
+        throw (std::invalid_argument) "Incorrect line";
     }
     return num;
 }
@@ -74,7 +74,7 @@ short Div::getType() {
 
 double Div::calculate(std::vector<int> coef) {
     if (coef[1] == 0){
-        throw "Can't divide by zero";
+        throw (std::invalid_argument) "Can't divide by zero";
     }
     return (double)(coef[0] / coef[1]);
 }
@@ -107,8 +107,8 @@ std::vector<double> Equation::result(string &s) {
         result.push_back((double)-1*coef[1]/(2*coef[0]));
         return result;
     }
-    result.push_back((-1*coef[1] + sqrt(D))/(2*coef[0]));
-    result.push_back((-1*coef[1] - sqrt(D))/(2*coef[0]));
+    result.push_back((-1 * coef[1] + sqrt(D)) / (2 * coef[0]));
+    result.push_back((-1 * coef[1] - sqrt(D)) / (2 * coef[0]));
     return result;
 }
 
@@ -123,7 +123,7 @@ std::vector<double> Solver::solve(short type, std::string problem) {
         i++;
     }
     if (i == n){
-        throw "No operation found.";
+        throw (std::logic_error) "No operation found.";
     }
     return op[i]->result(problem);
 }
